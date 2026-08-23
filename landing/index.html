@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MotoTaller — A2K Digital Studio</title>
+<meta name="description" content="MotoTaller — punto de venta e inventario de repuestos para motos, con catálogo de marcas y modelos. App Android de A2K Digital Studio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Teko:wght@600;700&family=Barlow:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0e0e11; --surface:#16161a; --surface-2:#201f26; --border:#2c2b33;
+  --ink:#f2f2f5; --ink-dim:#8b8b95;
+  --racing:#e11d2e; --racing-dim:#af1522;
+  --chrome:#c4cdd8; --chrome-dim:#98a2af;
+  --shadow:rgba(0,0,0,0.6);
+  --font-hero:'Teko',ui-sans-serif,sans-serif;
+  --font-body:'Barlow',system-ui,sans-serif;
+  --font-mono:'Space Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--font-body); line-height:1.55; -webkit-font-smoothing:antialiased;}
+a{color:inherit;} img,svg{display:block; max-width:100%;}
+.wrap{max-width:1060px; margin:0 auto; padding:0 28px;}
+@media (prefers-reduced-motion: reduce){*{animation-duration:0.001ms !important; animation-iteration-count:1 !important;}}
+
+.brandstrip{display:flex; align-items:center; justify-content:space-between; padding:22px 0; border-bottom:1px solid var(--border); gap:16px;}
+.a2k-mark{display:flex; align-items:center; gap:9px;}
+.a2k-mark svg{width:26px; height:26px;}
+.a2k-mark .word{font-family:var(--font-mono); font-size:11px; letter-spacing:0.14em; color:var(--ink-dim); text-transform:uppercase;}
+.a2k-mark .word b{color:var(--ink); font-weight:700;}
+.stripes{display:flex; gap:3px;}
+.stripes span{width:16px; height:14px; background:repeating-linear-gradient(45deg, var(--racing) 0 4px, transparent 4px 8px);}
+.livepulse{display:flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:11px; color:var(--ink-dim); text-transform:uppercase; letter-spacing:0.1em;}
+.livepulse .dot{width:7px; height:7px; border-radius:50%; background:var(--racing); animation:pulse 1.8s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+
+.hero{padding:70px 0 46px; display:grid; grid-template-columns:1.25fr 0.75fr; gap:46px; align-items:center;}
+.eyebrow{font-family:var(--font-mono); font-size:12px; letter-spacing:0.16em; color:var(--racing); text-transform:uppercase; margin:0 0 16px; display:flex; align-items:center; gap:10px;}
+.eyebrow::before{content:''; width:22px; height:1px; background:var(--racing);}
+h1{font-family:var(--font-hero); font-weight:700; text-transform:uppercase; font-size:clamp(64px, 11vw, 122px); line-height:0.85; margin:0 0 22px; color:var(--ink);}
+h1 em{font-style:normal; color:var(--racing);}
+.sub{font-size:19px; color:var(--ink-dim); max-width:520px; margin:0 0 30px;}
+.sub b{color:var(--ink); font-weight:600;}
+.hero-actions{display:flex; align-items:center; gap:18px; flex-wrap:wrap;}
+
+.panel{position:relative; background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:26px 22px 20px; box-shadow:0 24px 60px -34px var(--shadow); overflow:hidden;}
+.panel .tag{font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.14em; color:var(--ink-dim); text-transform:uppercase; margin-bottom:16px;}
+.speedbox{position:relative; height:104px; border-radius:6px; background:#1a1a1e; overflow:hidden; display:flex; align-items:center; justify-content:center;}
+.needle{width:2px; height:38px; background:var(--racing); transform-origin:bottom center; animation:rev 2.6s ease-in-out infinite;}
+@keyframes rev{0%,100%{transform:rotate(-40deg);}50%{transform:rotate(40deg);}}
+.panel .readout{display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:11.5px; color:var(--ink-dim); margin-top:16px; gap:10px;}
+.panel .readout b{color:var(--racing); font-weight:700;}
+
+.btn-primary{font-family:var(--font-body); font-weight:700; font-size:16px; background:linear-gradient(135deg, var(--racing), var(--racing-dim)); color:#fff; border:none; padding:16px 30px; border-radius:8px; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:10px; box-shadow:0 10px 28px -12px rgba(225,29,46,0.45); transition:transform 0.15s ease;}
+.btn-primary:hover{transform:translateY(-2px);}
+.btn-secondary{font-family:var(--font-body); font-weight:600; font-size:16px; background:transparent; color:var(--ink); border:1px solid var(--chrome-dim); padding:15px 30px; border-radius:8px; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:10px; transition:background 0.15s ease;}
+.btn-secondary:hover{background:rgba(196,205,216,0.1);}
+.meta-line{font-family:var(--font-mono); font-size:12.5px; color:var(--ink-dim);} .meta-line span{color:var(--ink);}
+
+.brands{padding:18px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); display:flex; gap:22px; flex-wrap:wrap; align-items:center; font-family:var(--font-mono); font-size:12px; color:var(--ink-dim); letter-spacing:0.06em;}
+.brands b{color:var(--racing); text-transform:uppercase; font-weight:700;}
+
+.manual-section{padding:52px 0 66px;}
+.manual{background:var(--surface); border:1px solid var(--border); border-radius:14px; box-shadow:0 24px 60px -30px var(--shadow); overflow:hidden;}
+.manual-head{display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap; padding:14px 26px; background:var(--surface-2); border-bottom:1px solid var(--border); font-family:var(--font-mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-dim);}
+.manual-head b{color:var(--racing); font-weight:700;}
+.manual-body{display:grid; grid-template-columns:1.2fr 1px 1fr;}
+.manual-rule{background:var(--border);}
+.manual-left,.manual-right{padding:32px 30px;}
+.manual-left h2,.manual-right h2{font-family:var(--font-hero); font-weight:700; text-transform:uppercase; font-size:30px; margin:0 0 20px; line-height:1;}
+.steps{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:16px;}
+.steps li{display:grid; grid-template-columns:34px 1fr; gap:14px; align-items:baseline;}
+.steps .n{font-family:var(--font-mono); font-size:13px; color:var(--racing); font-weight:700;}
+.steps p{margin:0; font-size:14.5px; color:var(--ink-dim);} .steps p b{color:var(--ink); font-weight:600;}
+.note{margin-top:22px; padding:12px 14px; background:var(--surface-2); border:1px solid var(--border); border-radius:6px; font-size:12.5px; color:var(--ink-dim); font-family:var(--font-mono); line-height:1.6;}
+.note b{color:var(--racing); font-weight:700; letter-spacing:0.06em;}
+.manual-right{display:flex; flex-direction:column; gap:14px; background:var(--surface-2);}
+.pricebadge{font-family:var(--font-mono); font-size:11.5px; letter-spacing:0.1em; color:var(--ink-dim); text-transform:uppercase;}
+.pricebadge b{display:block; font-family:var(--font-hero); font-weight:700; text-transform:uppercase; font-size:38px; color:var(--racing); margin-top:2px; line-height:1;}
+.filerow{display:flex; justify-content:space-between; gap:12px; width:100%; font-family:var(--font-mono); font-size:12.5px; color:var(--ink-dim); border-top:1px dashed var(--border); padding-top:11px;}
+.filerow span:last-child{color:var(--ink);}
+
+.rack-section{padding:6px 0 72px;}
+.rack-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:26px; flex-wrap:wrap; gap:10px;}
+.rack-head h2{font-family:var(--font-hero); font-weight:700; text-transform:uppercase; font-size:42px; margin:0; line-height:1;}
+.rack-head .count{font-family:var(--font-mono); font-size:12.5px; color:var(--ink-dim);}
+.rack{display:grid; grid-template-columns:repeat(2, 1fr); gap:18px 20px;}
+.crate{position:relative; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:18px 20px 16px; transition:border-color 0.18s ease, transform 0.18s ease, background 0.18s ease;}
+.crate:hover{transform:translateY(-3px); background:var(--surface-2); border-color:var(--chrome-dim);}
+.crate .sku{font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.12em; color:var(--racing); text-transform:uppercase; display:block; margin-bottom:7px;}
+.crate .name{font-family:var(--font-hero); font-weight:700; text-transform:uppercase; font-size:26px; line-height:1.05; display:block; margin-bottom:6px;}
+.crate .desc{font-size:13.5px; color:var(--ink-dim); margin:0;}
+
+@media (max-width:820px){.hero{grid-template-columns:1fr; gap:34px; padding-top:52px;} .manual-body{grid-template-columns:1fr;} .manual-rule{display:none;}}
+@media (max-width:600px){.rack{grid-template-columns:1fr;} .stripes{display:none;}}
+
+footer{border-top:1px solid var(--border); padding:38px 0 48px;}
+.foot-grid{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap;}
+.foot-left{display:flex; align-items:center; gap:12px;}
+.foot-left svg{width:30px; height:30px;}
+.foot-left .txt{font-family:var(--font-mono); font-size:11.5px; color:var(--ink-dim); line-height:1.5;} .foot-left .txt b{color:var(--ink); font-weight:700;}
+.foot-right{font-family:var(--font-mono); font-size:12px; color:var(--ink-dim); text-align:right; line-height:1.8;}
+.foot-right a{color:var(--racing); text-decoration:none; border-bottom:1px solid transparent;}
+.foot-right a:hover{border-bottom-color:var(--racing);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brandstrip">
+    <div class="a2k-mark"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M16 4 L27 26 H21 L16 15 L11 26 H5 Z" style="fill:var(--racing)"/></svg><span class="word"><b>A2K</b> DIGITAL STUDIO</span></div>
+    <div class="stripes" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="livepulse"><span class="dot"></span> Sistema activo</div>
+  </div>
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Punto de venta para repuestos de motos</p>
+      <h1>Moto<em>Taller</em></h1>
+      <p class="sub">Mostrador, inventario y catálogo de <b>32 marcas y cientos de modelos</b> para saber al instante qué repuesto sirve para cada moto.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#descarga">↓ Descargar MotoTaller</a>
+        <span class="meta-line">Android · <span>50 MB</span> · pide tu código demo gratis por WhatsApp</span>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="tag">Compatibilidad</div>
+      <div class="speedbox" aria-hidden="true"><div class="needle"></div></div>
+      <div class="readout"><span>Honda · CG125</span><b>3 en stock</b></div>
+    </div>
+  </section>
+
+  <div class="brands"><b>Marcas ·</b> Honda, Yamaha, Suzuki, Kawasaki, Bajaj, KTM, BMW, Ducati, Bera, Toro y 22 más</div>
+
+  <section class="manual-section" id="descarga">
+    <div class="manual">
+      <div class="manual-head"><span>Guía de instalación</span><span>Versión <b>1.0.0</b></span></div>
+      <div class="manual-body">
+        <div class="manual-left">
+          <h2>Cómo instalarla</h2>
+          <ol class="steps">
+            <li><span class="n">01</span><p>Escríbenos por WhatsApp y te mandamos tu código de licencia (demo o PRO).</p></li>
+            <li><span class="n">02</span><p>Toca <b>Descargar .apk</b> — el archivo baja directo a tu teléfono.</p></li>
+            <li><span class="n">03</span><p>Tu teléfono va a advertir que es de "una fuente desconocida" — es normal, toca <b>Configuración</b> y luego <b>Permitir</b>. Abre el archivo e toca <b>Instalar</b>.</p></li>
+            <li><span class="n">04</span><p>Abre MotoTaller y escribe el código que te mandamos — la app se activa al instante.</p></li>
+          </ol>
+          <div class="note"><b>AVISO ·</b> El texto exacto del aviso de seguridad cambia un poco según la marca del teléfono — el paso siempre es el mismo: permitir esta instalación una vez.</div>
+        </div>
+        <div class="manual-rule" aria-hidden="true"></div>
+        <div class="manual-right">
+          <div class="pricebadge">Licencia<b>de por vida</b></div>
+          <a class="btn-primary" href="https://github.com/tiendadigitalaipro/mototaller/releases/latest/download/mototaller.apk">↓ Descargar .apk</a>
+          <a class="btn-secondary" href="https://wa.me/584164117331">💬 Pedir código por WhatsApp</a>
+          <div class="filerow"><span>Versión</span><span>1.0.0</span></div>
+          <div class="filerow"><span>Plataforma</span><span>Android 8+</span></div>
+          <div class="filerow"><span>Tamaño</span><span>50 MB</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="rack-section">
+    <div class="rack-head"><h2>Qué incluye</h2><span class="count">9 módulos</span></div>
+    <div class="rack">
+      <div class="crate"><span class="sku">MOD-01</span><span class="name">Dashboard</span><p class="desc">Ventas del día, tickets y stock crítico de un vistazo.</p></div>
+      <div class="crate"><span class="sku">MOD-02</span><span class="name">Punto de Venta</span><p class="desc">Cobra rápido en dólares o bolívares con 8 métodos de pago.</p></div>
+      <div class="crate"><span class="sku">MOD-03</span><span class="name">Inventario</span><p class="desc">Repuestos por categoría, marca y modelo compatible, con código propio.</p></div>
+      <div class="crate"><span class="sku">MOD-04</span><span class="name">Clientes</span><p class="desc">Directorio de contactos: nombre, teléfono, correo y notas.</p></div>
+      <div class="crate"><span class="sku">MOD-05</span><span class="name">Ventas</span><p class="desc">Historial completo de cada venta con método de pago y tasa.</p></div>
+      <div class="crate"><span class="sku">MOD-06</span><span class="name">Marcas / Modelos</span><p class="desc">Catálogo de 32 marcas y cientos de modelos para verificar compatibilidad.</p></div>
+      <div class="crate"><span class="sku">MOD-07</span><span class="name">Caja</span><p class="desc">Apertura y cierre de turno, entradas, salidas y diferencia real.</p></div>
+      <div class="crate"><span class="sku">MOD-08</span><span class="name">Reportes</span><p class="desc">Lo más vendido, ingresos por período y comportamiento del negocio.</p></div>
+      <div class="crate"><span class="sku">MOD-09</span><span class="name">Configuración</span><p class="desc">Datos del negocio, tasa del día y respaldo de tu información.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-grid">
+      <div class="foot-left"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M16 4 L27 26 H21 L16 15 L11 26 H5 Z" style="fill:var(--racing)"/></svg><div class="txt"><b>A2K DIGITAL STUDIO</b><br>Sistemas de gestión para negocios</div></div>
+      <div class="foot-right">¿Dudas o quieres tu licencia?<br><a href="https://wa.me/584164117331">WhatsApp +58 416-4117331</a></div>
+    </div>
+  </footer>
+</div>
+</body>
+</html>
