@@ -39,6 +39,7 @@ dependencies:
   http: ^1.2.2
   image_picker: ^1.1.2
   posthog_flutter: ^5.36.6
+  shimmer: ^4.0.0
 
 dev_dependencies:
   flutter_test:
